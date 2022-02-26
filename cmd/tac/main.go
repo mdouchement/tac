@@ -25,7 +25,7 @@ func main() {
 		Use:          "tac",
 		Short:        "Tube Amps Calculator",
 		Args:         coral.ExactArgs(1),
-		Version:      fmt.Sprintf("build %.7s @ %s - %s", revision, date, runtime.Version()),
+		Version:      fmt.Sprintf("%.7s @ %s - %s", revision, date, runtime.Version()),
 		SilenceUsage: true,
 		RunE: func(c *coral.Command, args []string) error {
 			payload, err := os.ReadFile(args[0])
