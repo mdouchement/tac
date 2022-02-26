@@ -1,0 +1,33 @@
+#
+# TAC file based on the example from
+# http://www.valvewizard.co.uk/smoothing.html "Design Example" chapter.
+#
+voltage: 340-0-340 # Or just `0-330' for non center tap transformer
+current: 0.300 # Current of the transformer (leave 0 to ignore)
+rectifier: GZ34 # DIODE (full wave), GZ34, EZ81, 5U4B, 5Y3
+choke:
+  # Includes screen in current computation.
+  # Useful when Pentode-Operated pentodes are used.
+  # Should be false for Triode-Operated & Ultralinear-Operated pentodes.
+  include_screen: true
+  # Value of the first PSU capacitor.
+  first_capacitor: 0.00005 # 50µF (use 0 to not compute choke)
+power_valves:
+  number_of_valves: 2
+  model: EL34 # EL34, 6L6GC, 6V6S
+  topology: PP # SE, PP
+  rload: 6600 # Output transformer primary impedance in Ohm. Set 0 to calculate the value (not accurate)
+preamp_valves:
+- model: ECC83S # ECC81, ECC83S, ECC803S, 6SL7
+  number_of_triodes: 6
+#
+# Extra things we can compute.
+#
+cathode_bypass_capacitors:
+- 1000.0
+- 2200.0
+- 5600.0
+led_resistor: # https://robrobinette.com/5e3_Modifications.htm#LED_Pilot_Light
+  vac: 6.7 # Heater AC voltage
+  dc_forward_voltage: 3.5
+  current: 0.02 # 20mA

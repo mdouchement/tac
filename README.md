@@ -1,0 +1,84 @@
+# TAC
+
+This tool computes valves amplifer electronic stuff.
+It also exposes formulas as a package.
+
+
+## Usage
+
+```
+$ tac tac.yml --verbose
+
+Heaters:
+- 6L6GC:   2 * 900mA = 1.8A
+- ECC81:   1 * 300mA = 300mA
+- 6SL7:    3 * 300mA = 900.0mA
+Choke: 5.39H
+Power consumed:
+- Wa: 60W      - for 2 valve(s) in PP
+- Ia: 130.2mA  - at plate for 2 valve(s) in PP
+- Is: 10.7mA   - at screen for 2 valve(s) in PP
+Preamp consumed:
+- ECC81:   typical: 2 * 10mA = 20mA
+           maximum: 2 * 8.3mA = 16.7mA (5W)
+- 6SL7:    typical: 6 * 2.3mA = 13.8mA
+           maximum: 6 * 3.3mA = 20mA (6W)
+
+====
+
+Selected transformer voltage: 350-0-350
+Diode Reverse Repetative Maximum (Vrrm) rating: 1.2kV
+  -> We knock off 10% to allow for variation in mains voltage, and knock off another 10% to allow for the transformer voltage being high if loaded only lightly.
+  -> The popular 1N4007 is rated for 1000V. Two 1N4007 in series can handle 2000v.
+  -> http://www.valvewizard.co.uk/bridge.html
+Calculated voltage at first capacitor (B+): 479.5V
+Calculated DC current at first capacitor: 201mA
+Calculated DC wattage at first capacitor: 96.4W
+Calculated choke: 5.93H @ 52.09mA (10% plus factored in)
+  -> Resonant frequency is kept below 10Hz.
+Calculated current: 195.25mA (10% plus factored in) at 6.6kΩ load
+  -> Maximum preamp current consumption is used.
+Calculated maximal valve(s) wattage: 71W
+Calculated filament current (typically the 6.3v secondary): 3A
+Calculated cathode bypass capacitor: Ck=35.01µF for Rk=1kΩ @ F=5Hz
+Calculated cathode bypass capacitor: Ck=15.92µF for Rk=2.2kΩ @ F=5Hz
+Calculated cathode bypass capacitor: Ck=6.25µF for Rk=5.6kΩ @ F=5Hz
+Calculated LED resistor: 201.89Ω for 0.089W @ VAC=5.33V
+
+Disclaimer:
+  Please, consult your chosen tube model manufacturer data sheet, especially, when you entered the Rload.
+  Then the calculation provided is an estimation based on the assumption that Rload is not relatively small!
+  Tubes are non-linear devices and current draw may change under a number of conditions!
+  This calculation is provided in the hope of being useful as a reference only.
+  Proceed with caution! This tool disclaims any responsibility from any intended or actual use and consequences of this calculation.
+
+Thanks:
+  This tool is fully inspired by https://thesubjectmatter.com/calcptcurrent.html
+  It use formula from Merlin Blencowe's books and its website http://www.valvewizard.co.uk
+```
+
+
+## Specifications
+
+- Only computes for FULL WAVE rectification
+  - Center tap transformer
+  - Non center tap transformer
+- The rectifier must have a capacitor input load
+  - https://www.hammfg.com/electronics/transformers/rectifier
+- Preamp tube current consumption may be way greater than the real value because it's based on the maximum power dissipation.
+
+
+# License
+
+**MIT**
+
+
+## Contributing
+
+All PRs are welcome.
+
+1. Fork it
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+5. Push to the branch (git push origin my-new-feature)
+6. Create new Pull Request
