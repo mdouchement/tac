@@ -3,7 +3,7 @@ module github.com/mdouchement/tac
 go 1.17
 
 require (
-	github.com/muesli/coral v1.0.0
+	github.com/spf13/cobra v1.4.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 

@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/mdouchement/tac/aio"
-	"github.com/muesli/coral"
+	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 )
 
@@ -21,13 +21,13 @@ func main() {
 		Logger: &aio.Logger{},
 	}
 
-	c := &coral.Command{
+	c := &cobra.Command{
 		Use:          "tac",
 		Short:        "Tube Amps Calculator",
-		Args:         coral.ExactArgs(1),
+		Args:         cobra.ExactArgs(1),
 		Version:      fmt.Sprintf("%.7s @ %s - %s", revision, date, runtime.Version()),
 		SilenceUsage: true,
-		RunE: func(c *coral.Command, args []string) error {
+		RunE: func(c *cobra.Command, args []string) error {
 			payload, err := os.ReadFile(args[0])
 			if err != nil {
 				return err
